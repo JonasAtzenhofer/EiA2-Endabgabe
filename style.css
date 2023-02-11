@@ -1,3 +1,13 @@
+#canvas{
+  background-color: black;
+  top: 0%;
+  left: 300px;
+  width: 1108px;
+  height: 100%;
+  position: absolute;
+  cursor: crosshair;
+  display: block;
+  }
 
 
 #Create{
