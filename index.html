@@ -8,28 +8,29 @@
     <script src="Main.js" defer ></script>
     <script src="Rocket.js"></script>
     <script src="Explosion.js"></script>
-    <script src="Particle.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <form>
     <div id="Create">
         <h1>Create Rocket</h1>
         <br>
         <h3>Raketenfarbe</h3>
-        <input type="color" id="color">
+        <input type="color" name="color" id="color">
         <br>
         <h3>Explosions-Radius</h3>
-        <input type="range" min="1" max="100"    class="RadiusSlider">
+        <input type="range" name="range"    class="RadiusSlider">
         <br>
         <h3>Partikel-Anzahl</h3>
-        <input type="range" min="1" max="100"  class="PartikelSlider">
+        <input type="range" name="strength"  class="PartikelSlider">
         <br>
         <h3>Explosions-Dauer</h3>
-        <input type="range" min="1" max="100"  class="TimeSlider">
+        <input type="range" name="length"  class="TimeSlider">
         <br>
         <h3>RaketenName</h3>
-        <input type="text" id="RocketName">
+        <input type="text" name="name" id="RocketName">
         <br>
+    </form>
         <br>
         <br>
         <button type="submit" id="CreateRocket"> Save Rocket</button>
@@ -37,7 +38,8 @@
         <br>
         <br>
         <button type="submit" id="DeleteRocket"> Delete Rocket</button>
-    </div> 
+    </div>
+ 
     
     
 
@@ -54,8 +56,9 @@
     </div>
 
     <div>
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" ></canvas>
     </div>
+
 
    
 
