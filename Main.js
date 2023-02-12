@@ -1,3 +1,8 @@
+//EiA2 Endabgabe
+//Name: Jonas Atzenhofer
+//Matrikel: 271026
+//Datum: 12.02.2023
+// In Zusammenarbeit mit: Yannik König
 var Eia2Endabgabe;
 (function (Eia2Endabgabe) {
     window.addEventListener("load", handleLoad);
