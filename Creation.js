@@ -2,9 +2,8 @@ var Eia2Endabgabe;
 (function (Eia2Endabgabe) {
     class Creation {
         name;
-        saveCreation() {
-        }
-        triggerCreation() {
+        constructor(_name) {
+            this.name = _name;
         }
     }
     Eia2Endabgabe.Creation = Creation;

@@ -6,9 +6,5 @@ namespace Eia2Endabgabe {
         constructor(_name: string) {
             this.name = _name;
         }
-        
-        triggerCreation(): void {
-            
-        }
     }
-    }
+}

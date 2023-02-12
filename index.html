@@ -8,29 +8,29 @@
     <script src="Main.js" defer ></script>
     <script src="Creation.js"></script>
     <script src="Explosion.js"></script>
+    <script src="vector.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form>
+    
     <div id="Create">
-        <h1>Create Rocket</h1>
-        <br>
-        <h3>Raketenfarbe</h3>
-        <input type="color" name="color" id="color">
-        <br>
-        <h3>Explosions-Radius</h3>
-        <input type="range" name="range"    class="RadiusSlider">
-        <br>
-        <h3>Partikel-Anzahl</h3>
-        <input type="range" name="strength"  class="PartikelSlider">
-        <br>
-        <h3>Explosions-Dauer</h3>
-        <input type="range" name="length"  class="TimeSlider">
-        <br>
-        <h3>RaketenName</h3>
-        <input type="text" name="name" id="RocketName">
-        <br>
-    </form>
+
+        <form>
+            <p>Farbe</p>
+            <input type="color" name ="color" id="color">
+    
+            <p>Dauer</p>
+            <input type="range" name="length" id="length"></select>
+    
+            <p>Radius</p>
+            <input type="range" name="range" id="range">
+    
+            <p>Stärke</p>
+            <input type="range" name="strength" id="strength">
+    
+            <p>Name</p>
+            <input type="text" name="name" id="name">
+        </form>
         <br>
         <br>
         <button type="button" id="save"> Save Rocket</button>
@@ -47,8 +47,8 @@
         <div class="dropdown">
             <!-- <button class="dropbtn">Gespeicherte Raketen</button>
             <div class="dropdown-content"> -->
-              <li id="list">
-              </li>
+              <ul id="list">
+              </ul>
 
             </div>
           </div> 

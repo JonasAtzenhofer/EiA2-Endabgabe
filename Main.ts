@@ -5,10 +5,12 @@ namespace Eia2Endabgabe {
     export let crc2: CanvasRenderingContext2D;
 
     const url: string = "https://webuser.hs-furtwangen.de/~atzenhof/Database/index.php/";
-
-    let fireworks: Creation[] = [];
-
-
+    let fireworks: Creation[] = []; 
+    let particles: Explosion[] = []; 
+    let interval: number;
+    let startTime: number; 
+    let length: number; 
+    
     interface Data {
         [id: number]: CreationData[]; 
     }
@@ -46,9 +48,7 @@ namespace Eia2Endabgabe {
         let data: ReturnedJSON = JSON.parse(item);
 
         generateContent(data); 
-
-
-    };
+    }
 
     function generateContent(_data: ReturnedJSON): void {
         let keys: string[] = Object.keys(_data.data);
@@ -66,21 +66,12 @@ namespace Eia2Endabgabe {
 
             list.appendChild(listObject);
             listObject.addEventListener("click", generatePresets);
-            console.log(object);
-        }
-
-            
-
+            listObject.setAttribute("id", index.toString()); 
+        }          
     }
 
     async function saveIt(): Promise<void> {
         let formData: FormData = new FormData(document.querySelector("form")); 
-        // let name: string = (formData.get("name")).toString();
-        // let color: string = (formData.get("color")).toString();
-        // let length: number = parseInt((formData.get("length")).toString());
-        // let range: number = parseInt((formData.get("range")).toString());
-        // let strength: number = parseInt((formData.get("strength")).toString()); 
-
         
         interface FormDataJSON {
             [key: string]: FormDataEntryValue | FormDataEntryValue[];
@@ -98,7 +89,6 @@ namespace Eia2Endabgabe {
         query.set("data", JSON.stringify(json));
         let response: Response = await fetch(url + "?" + query.toString());
         let responseText: string = await response.text();
-        console.log()
         if (responseText.includes("success")) {
             alert("Item added!"); 
         }
@@ -107,15 +97,58 @@ namespace Eia2Endabgabe {
                 }
     }
 
-    function saveCreation(_save: Creation): void {
+    function canvasClick(_event: MouseEvent): void {
+        let formData: FormData = new FormData(document.querySelector("form")); 
+        let color: string = (formData.get("color")).toString();
+        length = parseInt((formData.get("length")).toString());
+        let range: number = parseInt((formData.get("range")).toString());
+        let strength: number = parseInt((formData.get("strength")).toString()); 
 
+        for (let index = 0; index < strength; index++) {
+            let newExplosion: Explosion = new Explosion(color, length, range, strength); 
+            let clickPosition: Vector = new Vector(_event.offsetX, _event.offsetY);
+            newExplosion.position = clickPosition; 
+
+            particles.push(newExplosion); 
+            
+            
+        }
+        interval = setInterval(update, 100); 
+        startTime = Date.now();
     }
 
-    function canvasClick(): void {
+    function update(): void {
+        crc2.fillStyle = "rgba(0, 0, 0, 0.3)"; 
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        if (Date.now() - startTime >= length) {
+            setTimeout(() => {
+                clearInterval(interval);
+                crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); 
+                particles.splice(0); 
+            });
+        }
+        for (let newExplosion of particles) {
+            newExplosion.move(1 / 2); 
+        }
+        }
 
-    };
+    function generatePresets(event): void {
+        let id: number = event.target.id; 
+        let object: Explosion = <Explosion>fireworks[id]; 
+        
+        let input1: HTMLElement = document.getElementById("color");
+        input1.setAttribute("value", object.color); 
 
-    function generatePresets(): void {
+        let input2: HTMLElement = document.getElementById("length");
+        input2.setAttribute("value", (object.length).toString()); 
 
+        let input3: HTMLElement = document.getElementById("range");
+        input3.setAttribute("value", (object.range).toString()); 
+
+        let input4: HTMLElement = document.getElementById("strength"); 
+        input4.setAttribute("value", (object.strength).toString()); 
+
+        let input5: HTMLElement = document.getElementById("name"); 
+        input5.setAttribute("value", object.name); 
     }
 }
