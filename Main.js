@@ -36,6 +36,36 @@ var Eia2Endabgabe;
             list.appendChild(listObject);
             listObject.addEventListener("click", generatePresets);
             listObject.setAttribute("id", index.toString());
+            let deleteButton = document.createElement("button");
+            deleteButton.setAttribute("type", "button");
+            let id = "delete" + index;
+            deleteButton.setAttribute("id", id);
+            deleteButton.addEventListener("click", deleteObject);
+            deleteButton.innerHTML = "Löschen";
+            listObject.appendChild(deleteButton);
+        }
+    }
+    async function deleteObject(_event) {
+        let trigger = _event.target.id;
+        let triggerNum = trigger.replace(/\D/g, "");
+        let identifyer = parseInt(triggerNum);
+        let response0 = await fetch(url + "?command=find&collection=Creations");
+        let item = await response0.text();
+        let data = JSON.parse(item);
+        let keys = Object.keys(data.data);
+        let id = keys[identifyer];
+        let query = new URLSearchParams();
+        query.set("command", "delete");
+        query.set("collection", "Creations");
+        query.set("id", id);
+        let response1 = await fetch(url + "?" + query.toString());
+        let responseText = await response1.text();
+        if (responseText.includes("success")) {
+            alert("Deine Kreation wurde gelöscht!");
+            window.location.reload();
+        }
+        else {
+            alert("Error! Try again!");
         }
     }
     async function saveIt() {
@@ -53,10 +83,28 @@ var Eia2Endabgabe;
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
         if (responseText.includes("success")) {
-            alert("Item added!");
+            alert("Deine Kreation wurde gespeichert!");
+            window.location.reload();
         }
         else {
             alert("Error! Try again!");
+        }
+    }
+    function generatePresets(_event) {
+        let target = _event.target;
+        if (target.tagName != "BUTTON") {
+            let id = parseInt(_event.target.id);
+            let object = fireworks[id];
+            let input1 = document.getElementById("color");
+            input1.setAttribute("value", object.color);
+            let input2 = document.getElementById("length");
+            input2.setAttribute("value", (object.length).toString());
+            let input3 = document.getElementById("range");
+            input3.setAttribute("value", (object.range).toString());
+            let input4 = document.getElementById("strength");
+            input4.setAttribute("value", (object.strength).toString());
+            let input5 = document.getElementById("name");
+            input5.setAttribute("value", object.name);
         }
     }
     function canvasClick(_event) {
@@ -87,20 +135,6 @@ var Eia2Endabgabe;
         for (let newExplosion of particles) {
             newExplosion.move(1 / 2);
         }
-    }
-    function generatePresets(event) {
-        let id = event.target.id;
-        let object = fireworks[id];
-        let input1 = document.getElementById("color");
-        input1.setAttribute("value", object.color);
-        let input2 = document.getElementById("length");
-        input2.setAttribute("value", (object.length).toString());
-        let input3 = document.getElementById("range");
-        input3.setAttribute("value", (object.range).toString());
-        let input4 = document.getElementById("strength");
-        input4.setAttribute("value", (object.strength).toString());
-        let input5 = document.getElementById("name");
-        input5.setAttribute("value", object.name);
     }
 })(Eia2Endabgabe || (Eia2Endabgabe = {}));
 //# sourceMappingURL=Main.js.map

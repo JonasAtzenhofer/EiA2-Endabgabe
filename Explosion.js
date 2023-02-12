@@ -6,7 +6,6 @@ var Eia2Endabgabe;
         range;
         strength;
         position;
-        counter = 0;
         constructor(_color, _length, _range, _strength, _name) {
             super(_name);
             if (_name) {
