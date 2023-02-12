@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="Main.js" defer ></script>
-    <script src="Rocket.js"></script>
+    <script src="Creation.js"></script>
     <script src="Explosion.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -33,11 +33,10 @@
     </form>
         <br>
         <br>
-        <button type="submit" id="CreateRocket"> Save Rocket</button>
+        <button type="button" id="save"> Save Rocket</button>
         <br>
         <br>
         <br>
-        <button type="submit" id="DeleteRocket"> Delete Rocket</button>
     </div>
  
     
@@ -46,17 +45,17 @@
     <div id="SavedRockets">
         <h1>Saved Rockets</h1>
         <div class="dropdown">
-            <button class="dropbtn">Gespeicherte Raketen</button>
-            <div class="dropdown-content">
-              <li>Rakete 1</li>
-              <li>Rakete 2</li>
-              <li>Rakete 3</li>
+            <!-- <button class="dropbtn">Gespeicherte Raketen</button>
+            <div class="dropdown-content"> -->
+              <li id="list">
+              </li>
+
             </div>
           </div> 
     </div>
 
     <div>
-        <canvas id="canvas" ></canvas>
+        <canvas id="canvas" width="1108" height="900" ></canvas>
     </div>
 
 

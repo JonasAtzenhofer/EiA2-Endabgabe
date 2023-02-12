@@ -58,18 +58,16 @@
     z-index: 1;
   }
   
-  .dropdown-content li {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  #list :hover {
+    cursor: pointer;
+    /*Wenn man über einen Eintrag in der Liste fährt soll dieser blau werden*/
+    background-color: #7185de;
+    
+  }
+
+  /*Wenn man einen Eintrag in der Liste anklickt soll dieser Eintrag hervorgehoben werden und so lange blieben bis man auf einen neuen Klickt*/
+  #list :active {
+    font-weight: bold;  
   }
   
-  /* Change color of dropdown links on hover */
-  .dropdown-content li:hover {background-color: #ddd;}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #7185de;} 
+ 
